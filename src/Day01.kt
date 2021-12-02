@@ -36,6 +36,8 @@ object Day01{
 
 
     private fun part1__(input: List<Int>): Int = input.windowed(2).count { (a, b) -> a < b }
+
+
     private fun part2__(input: List<Int>): Int = part1__(input.windowed(3).map { it.sum() })
 
 

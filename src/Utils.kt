@@ -25,9 +25,9 @@ inline fun <reified T> Any.test(part: Int, testInput: T, expectedOutput: Int) {
     val name = if (part == 1) "part1" else "part2"
     val jclass = this::class.java
     jclass.declaredMethods.filter{it.name.contains(name) and !it.name.contains("lambda")}.forEach {
-        require(it.parameterCount == 1) { "Method must have exactly one parameter" }
-        require(it.parameterTypes[0].equals(T::class.java)) { "Parameter must be of type ${T::class.java}" }
-        require(it.returnType == Int::class.java) { "Method must return Int" }
+        require(it.parameterCount == 1) { "Method must have exactly one parameter but has ${it.parameterCount}" }
+        require(it.parameterTypes[0].equals(T::class.java)) { "Parameter must be of type ${T::class.java} but was ${it.parameterTypes[0]}" }
+        require(it.returnType == Int::class.java) { "Method must return Int but was ${it.returnType}" }
 
         check(it.invoke(this, testInput) == expectedOutput)
         println("Test passed: ${it.name} for $testInput")

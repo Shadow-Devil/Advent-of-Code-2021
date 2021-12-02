@@ -6,6 +6,7 @@ repositories {
     mavenCentral()
 }
 
+
 tasks {
     sourceSets {
         main {
@@ -16,4 +17,8 @@ tasks {
     wrapper {
         gradleVersion = "7.3"
     }
+}
+
+dependencies {
+    implementation("org.assertj:assertj-core:3.21.0")
 }
