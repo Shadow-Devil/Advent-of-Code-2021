@@ -1,3 +1,5 @@
+import Day02.Direction.*
+
 object Day02 {
     @JvmStatic
     fun main(args: Array<String>) {
@@ -13,17 +15,29 @@ object Day02 {
 
     }
 
+    enum class Direction {
+        UP, DOWN, FORWARD
+    }
 
+    private fun parseInput(input: List<String>): List<Pair<Direction, Int>> = input.map {
+        val (dir, length) = it.uppercase().split(" ")
+        Direction.valueOf(dir) to length.toInt()
+    }
 
-    private fun part1(input: List<String>): Int = input.fold(Pair(0, 0)) { (x, y), line ->
-        val parts = line.split(" ")
-        assert(parts.size == 2)
-        val length = parts[1].toInt()
-        when (parts[0]) {
-            "forward" -> Pair(x + length, y)
-            "down" -> Pair(x, y + length)
-            "up" -> Pair(x, y - length)
-            else -> error("Unknown direction: ${parts[0]}")
+    private fun part1Refactored(input: List<String>):Int = parseInput(input).fold(Pair(0,0)) { (x, y), (dir, length) ->
+        when (dir) {
+            FORWARD -> Pair(x + length, y)
+            DOWN -> Pair(x, y + length)
+            UP -> Pair(x, y - length)
+        }
+    }.run { first * second }
+
+    private fun part1(input: List<String>): Int = input.map(String::uppercase).fold(Pair(0, 0)) { (x, y), line ->
+        val (dir, length) = line.split(" ")
+        when (Direction.valueOf(dir)) {
+            FORWARD -> Pair(x + length.toInt(), y)
+            DOWN -> Pair(x, y + length.toInt())
+            UP -> Pair(x, y - length.toInt())
         }
     }.run { first * second }
 

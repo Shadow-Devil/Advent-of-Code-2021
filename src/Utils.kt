@@ -1,3 +1,5 @@
+//import org.assertj.core.api.Assertions
+//import org.assertj.core.api.Assertions.*
 import org.jetbrains.annotations.Contract
 import java.io.File
 import java.math.BigInteger
@@ -24,17 +26,19 @@ inline fun <reified T> Any.test(part: Int, testInput: T, expectedOutput: Int) {
 
     val name = if (part == 1) "part1" else "part2"
     val jclass = this::class.java
-    jclass.declaredMethods.filter{it.name.contains(name) and !it.name.contains("lambda")}.forEach {
-        require(it.parameterCount == 1) { "Method must have exactly one parameter but has ${it.parameterCount}" }
+    jclass.declaredMethods.filter{it.name.contains(name) and !it.name.contains("lambda|\\\$".toRegex())}.forEach {
+        require(it.parameterCount == 1) { "Method must have exactly one parameter but has ${it.parameterCount}, ${it.toGenericString()}" }
         require(it.parameterTypes[0].equals(T::class.java)) { "Parameter must be of type ${T::class.java} but was ${it.parameterTypes[0]}" }
         require(it.returnType == Int::class.java) { "Method must return Int but was ${it.returnType}" }
 
-        check(it.invoke(this, testInput) == expectedOutput)
+        check(it.invoke(this, testInput) == expectedOutput) { "Expected output for $name($testInput) to be $expectedOutput but was ${it.invoke(this, testInput)}" }
+//        assertThat(it.invoke(this, testInput)).isEqualTo(expectedOutput)
         println("Test passed: ${it.name} for $testInput")
     }
 
     jclass.declaredFields.filter { it.name.contains(name)}.forEach {
-        check((it.get(this) as (T) -> Int)(testInput) == expectedOutput)
+//        assertThat((it.get(this) as (T) -> Int)(testInput)).isEqualTo(expectedOutput)
+        check((it.get(this) as (T) -> Int)(testInput) == expectedOutput) { "Expected output for $name($testInput) to be $expectedOutput but was ${it.get(this) as (T) -> Int}($testInput)" }
         println("Test passed: ${it.name} for $testInput")
     }
 }
