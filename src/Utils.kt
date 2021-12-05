@@ -20,6 +20,8 @@ fun readInputToInt(name: String) = readInput(name).map { it.toInt() }
  */
 fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray())).toString(16)
 
+fun <T> List<T>.split() = Pair(first(), drop(1))
+
 @Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
 inline fun <reified T> Any.test(part: Int, testInput: T, expectedOutput: Int) {
     require(part in 1..2) { "Part must be between 1 and 2" }
