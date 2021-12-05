@@ -1,5 +1,4 @@
-@Suppress("unused")
-
+@Suppress("unused", "UNUSED_PARAMETER")
 object DayXX{
 
     @JvmStatic
