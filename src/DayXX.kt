@@ -19,4 +19,6 @@ object DayXX{
 
     private fun part2(input: List<Int>): Int = 0
 
+
+
 }
