@@ -10,10 +10,10 @@ object Day01{
 
 
         val input = readInputToInt("Day01")
+        println("Part 1: ${part1Refactored(input)}")
+        println("Part 2: ${part2(input)}")
         test(1, input, 1446)
         test(2, input, 1486)
-        println(part1Refactored(input))
-        println(part2(input))
     }
 
 

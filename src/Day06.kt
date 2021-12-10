@@ -10,8 +10,8 @@ object Day06{
 
         val input = readInput("Day06")
         println("Part 1: ${part1(input)}")
-        test(1, input, 363101)
         println("Part 2: ${part2(input)}")
+        test(1, input, 363101)
         test(2, input, 1644286074024)
     }
 

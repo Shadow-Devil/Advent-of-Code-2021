@@ -12,7 +12,8 @@ object Day02 {
         val input = readInput("Day02")
         println("Part 1: ${part1(input)}")
         println("Part 2: ${part2(input)}")
-
+        test(1, input, 1648020)
+        test(2, input, 1759818555)
     }
 
     enum class Direction {
