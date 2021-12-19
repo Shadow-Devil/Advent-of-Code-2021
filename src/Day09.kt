@@ -16,9 +16,17 @@ object Day09{
     }
 
     private fun part1(input: List<String>): Int {
-        return input.flatMapIndexed { idx: Int, it: String -> it.filterIndexed { idy, c -> c.isLowPoint(input, idx, idy) }.toList() }.map{
+        return input.flatMapIndexed { idx: Int, it: String ->
+            it.filterIndexed { idy, c ->
+                c.isLowPoint(
+                    input,
+                    idx,
+                    idy
+                )
+            }.toList()
+        }.sumOf {
             it.digitToInt() + 1
-        }.sum()
+        }
     }
 
     private fun part2(input: List<String>): Int {
