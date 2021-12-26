@@ -1,4 +1,6 @@
-@Suppress("unused", "UNUSED_PARAMETER")
+import utils.*
+
+@Suppress("unused", "UNUSED_PARAMETER", "LocalVariableName")
 object Day08{
 
     private data class Entry(val knownPatterns: List<String>, val toDisplay: List<String>)
@@ -45,49 +47,40 @@ object Day08{
         }
     }
 
-    private fun part1(input: List<String>): Int {
-        val entries = parseInput(input)
-        return entries.sumOf{(_, toDisplay) -> toDisplay.count { it.length in listOf(2, 3, 4, 7) }}
+    private fun part1(input: List<String>): Int =
+        parseInput(input).sumOf{(_, toDisplay) -> toDisplay.count { it.length in listOf(2, 3, 4, 7) }}
+
+    private fun part2(input: List<String>): Int = parseInput(input).sumOf { (knownPatterns, toDisplay) ->
+        val one = knownPatterns[0].toMutableSet()
+        val four = knownPatterns[2].toMutableSet()
+        val seven = knownPatterns[1].toMutableSet()
+        val two_three_five = knownPatterns.subList(3, 6).map { it.toMutableSet() }
+        val three = two_three_five.single { one.except(it).isEmpty() }
+        val zero_six_nine = knownPatterns.subList(6, 9).map { it.toMutableSet() }
+
+        val eight = knownPatterns.last().toMutableSet()
+
+        val a: Char = seven.except(one).single()
+        val b: Char = four.except(three).single()
+
+        val two = two_three_five.single { !it.contains(b) && it != three }
+        val five = two_three_five.single { it.contains(b) }
+
+        val c: Char = one.except(five).single()
+        val f: Char = one.except(two).single()
+        val six = zero_six_nine.single { !it.contains(c) }
+        val e: Char = six.except(five).single()
+        val zero_nine = zero_six_nine.filter { it.contains(c) }
+        val zero = zero_nine.single { it.contains(e) }
+        val d: Char = eight.except(zero).single()
+        val g: Char = eight.except(setOf(a, b, c, d, e, f)).single()
+
+        val segment = Segment(
+            b, a, c,
+            d,
+            e, g, f,
+        )
+
+        toDisplay.map { segment.get(it) }.joinToString("").toInt()
     }
-
-    private fun part2(input: List<String>): Int {
-        val entries = parseInput(input)
-        return entries.map { (knownPatterns, toDisplay) ->
-            val one = knownPatterns[0].toMutableSet()
-            val four = knownPatterns[2].toMutableSet()
-            val seven = knownPatterns[1].toMutableSet()
-            val two_three_five = knownPatterns.subList(3, 6).map { it.toMutableSet() }
-            val three = two_three_five.single { one.except(it).isEmpty() }
-            val zero_six_nine = knownPatterns.subList(6, 9).map { it.toMutableSet() }
-
-            val eight = knownPatterns.last().toMutableSet()
-
-            val a: Char = seven.except(one).single()
-            val b: Char = four.except(three).single()
-
-            val two = two_three_five.single { !it.contains(b) && it != three }
-            val five = two_three_five.single { it.contains(b) }
-
-            val c: Char = one.except(five).single()
-            val f: Char = one.except(two).single()
-            val six = zero_six_nine.single { !it.contains(c) }
-            val e: Char = six.except(five).single()
-            val zero_nine = zero_six_nine.filter { it.contains(c) }
-            val zero = zero_nine.single{ it.contains(e) }
-            val d: Char = eight.except(zero).single()
-            val g: Char = eight.except(setOf(a, b, c, d, e, f)).single()
-
-            val segment = Segment(
-                b, a, c,
-                    d,
-                e, g, f,
-            )
-
-            toDisplay.map{segment.get(it)}.joinToString("").toInt()
-        }.sum()
-    }
-
 }
-
-private fun String.toMutableSet() = this.toList().toMutableSet()
-private fun MutableSet<Char>.except(vararg sets: Set<Char>): MutableSet<Char> = this.filterNot { it in sets.flatMap { it }.toSet() }.toMutableSet()

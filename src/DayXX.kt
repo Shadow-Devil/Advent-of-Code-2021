@@ -1,3 +1,5 @@
+import utils.*
+
 @Suppress("unused", "UNUSED_PARAMETER")
 object DayXX{
 
@@ -15,9 +17,13 @@ object DayXX{
         //test(2, input, -1)
     }
 
-    private fun part1(input: List<Int>): Int = 0
+    private fun part1(input: List<Int>): Int {
+        TODO("not implemented")
+    }
 
-    private fun part2(input: List<Int>): Int = 0
+    private fun part2(input: List<Int>): Int {
+        TODO("not implemented")
+    }
 
 
 

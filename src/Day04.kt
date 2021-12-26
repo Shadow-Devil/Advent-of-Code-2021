@@ -1,9 +1,8 @@
 import java.io.File
+import utils.*
 
-@Suppress("unused")
 typealias SequenceOfBingoNumbers = List<Int>
 typealias BingoBoard = List<List<Int>>
-val lf: String = System.getProperty("line.separator")
 
 object Day04{
 

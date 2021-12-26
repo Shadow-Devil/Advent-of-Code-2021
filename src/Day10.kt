@@ -1,4 +1,5 @@
-@Suppress("unused", "UNUSED_PARAMETER")
+import utils.*
+
 object Day10{
 
     @JvmStatic
@@ -25,9 +26,6 @@ object Day10{
             this[this.size / 2]
         }
     }
-
-
-
 }
 
 private fun String.complete(): List<Char> {

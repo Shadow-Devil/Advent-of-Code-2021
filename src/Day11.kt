@@ -1,4 +1,5 @@
-@Suppress("unused", "UNUSED_PARAMETER")
+import utils.*
+
 object Day11{
 
     @JvmStatic
@@ -16,12 +17,10 @@ object Day11{
     }
 
     private fun part1(input: Array<IntArray>): Int {
-        val grid = input.map { it.map { it }.toIntArray() }.toTypedArray()
+        val grid: Array<IntArray> = input.map { it.map { it }.toIntArray() }.toTypedArray()
         var flashed = 0
         repeat(100){
-            //println(input.joinToString("\n") { it.joinToString("") }+ "\n")
             flashed += step(grid)
-            //println("flashed=$flashed")
         }
 
         return flashed
@@ -99,7 +98,4 @@ object Day11{
         }
 
     }
-
-
-
 }

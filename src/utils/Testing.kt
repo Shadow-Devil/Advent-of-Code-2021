@@ -1,30 +1,4 @@
-//import org.assertj.core.api.Assertions
-//import org.assertj.core.api.Assertions.*
-@file:Suppress("unused")
-import java.io.File
-import java.math.BigInteger
-import java.security.MessageDigest
-
-/**
- * Reads lines from the given input txt file.
- */
-fun readInput(name: String) = File("input", "$name.txt").readLines()
-
-/**
- * Reads lines from the given input txt file and converts them to Ints.
- */
-fun readInputToInt(name: String) = readInput(name).map { it.toInt() }
-
-fun readInputToIntList(name: String, delimiter: String = ",") = readInput(name).single().split(delimiter).map { it.toInt() }
-
-fun readInputToSingleInts(name: String) = readInput(name).map { it.map { it.digitToInt() }.toIntArray() }.toTypedArray()
-
-/**
- * Converts string to md5 hash.
- */
-fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray())).toString(16)
-
-fun <T> List<T>.split() = Pair(first(), drop(1))
+package utils
 
 @Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
 inline fun <reified T, reified R: Number> Any.test(part: Int, testInput: T, expectedOutput: R) {
@@ -49,5 +23,3 @@ inline fun <reified T, reified R: Number> Any.test(part: Int, testInput: T, expe
         println("Test passed: ${it.name} for $testInput")
     }
 }
-
-

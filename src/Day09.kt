@@ -1,4 +1,5 @@
-@Suppress("unused", "UNUSED_PARAMETER")
+import utils.*
+
 object Day09{
 
     @JvmStatic
@@ -59,13 +60,13 @@ object Day09{
 }
 
 private fun Char.isLowPoint(input: List<String>, idx: Int, idy: Int): Boolean {
-    val digit: Int = this.digitToInt()
-    val left: Int? = input[idx].getOrNull(idy - 1)?.digitToInt()
-    val right: Int? = input[idx].getOrNull(idy + 1)?.digitToInt()
-    val up: Int? = input.getOrNull(idx - 1)?.getOrNull(idy)?.digitToInt()
-    val down: Int? = input.getOrNull(idx + 1)?.getOrNull(idy)?.digitToInt()
+    val digit = digitToInt()
+    val left = input[idx].getOrNull(idy - 1)?.digitToInt()
+    val right = input[idx].getOrNull(idy + 1)?.digitToInt()
+    val up = input.getOrNull(idx - 1)?.getOrNull(idy)?.digitToInt()
+    val down = input.getOrNull(idx + 1)?.getOrNull(idy)?.digitToInt()
     return (left == null || digit < left) &&
             (right == null || digit < right) &&
-            (up == null || digit < up)
-            && (down == null || digit < down)
+            (up == null || digit < up) &&
+            (down == null || digit < down)
 }

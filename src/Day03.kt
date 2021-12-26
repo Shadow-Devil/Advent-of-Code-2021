@@ -1,3 +1,5 @@
+import utils.*
+
 object Day03 {
     @JvmStatic
     fun main(args: Array<String>) {
@@ -17,11 +19,9 @@ object Day03 {
 
     private fun part1(input: List<String>): Int = countBits(input)
         .map { if (it > 0) 1 else 0 }.joinToString(separator = "").toInt(2).let { gammaRate ->
-        val epsilonRate = inverse(gammaRate, input.first().length)
+        val epsilonRate = gammaRate.inverse(input.first().length)
         gammaRate * epsilonRate
     }
-
-    private fun inverse(x: Int, size: Int): Int = x.inv().and(1.shl(size) - 1)
 
     private fun countBits(input: List<String>) =
         input.fold(IntArray(input.first().length)) { acc, curr ->

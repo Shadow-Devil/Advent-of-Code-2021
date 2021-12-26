@@ -1,4 +1,5 @@
-@Suppress("unused", "UNUSED_PARAMETER")
+import utils.*
+
 object Day06{
 
     @JvmStatic
@@ -17,7 +18,7 @@ object Day06{
 
     private fun part1(input: List<String>): Int {
         var groups: Map<Int, Number> = input.first().split(",").map { it.toInt() }.groupBy { it }.mapValues{ it.value.size }
-        for(day in 1..80){
+        repeat(80) {
             groups = simulate(groups)
         }
 
@@ -37,7 +38,7 @@ object Day06{
 
     private fun part2(input: List<String>): Long {
         var groups: Map<Int, Number> = input.first().split(",").map { it.toInt() }.groupBy { it }.mapValues{ it.value.size }
-        for(day in 1..256){
+        repeat(256) {
             groups = simulate(groups)
         }
 

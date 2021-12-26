@@ -1,4 +1,5 @@
 import Day02.Direction.*
+import utils.*
 
 object Day02 {
     @JvmStatic

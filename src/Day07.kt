@@ -1,3 +1,4 @@
+import utils.*
 import kotlin.math.abs
 
 @Suppress("unused", "UNUSED_PARAMETER")
@@ -26,4 +27,4 @@ object Day07 {
     }
 }
 
-private fun List<Int>.lowestToHighest(): IntRange = minOf { it }..maxOf { it }
+

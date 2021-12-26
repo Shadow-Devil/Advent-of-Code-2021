@@ -1,3 +1,5 @@
+import utils.*
+
 data class Node(
     val name: String,
     val large: Boolean = name.all { !it.isLowerCase() },
@@ -71,18 +73,19 @@ object Day12 {
             path: List<Node>
         ): Set<List<Node>> {
             if (current.isEnd) return mutableSetOf(path + current)
+
             val newPath = path + current
-            val a = if (!(current.large || usedDouble || current.isStart))
+            val pathsWithDoubleUsed = if (!(current.large || usedDouble || current.isStart))
                 input.unvisited(current, visited).fold(setOf<List<Node>>()) { acc, next ->
                     acc union getPathCountToEnd(next, visited.copy(), true, newPath)
                 }
-            else setOf()
+            else emptySet()
 
             if (!current.large) visited.add(current)
 
-            return a.union(input.unvisited(current, visited).fold(setOf()) { acc, next ->
+            return pathsWithDoubleUsed union input.unvisited(current, visited).fold(setOf()) { acc, next ->
                 acc union getPathCountToEnd(next, visited.copy(), usedDouble, newPath)
-            })
+            }
         }
         return getPathCountToEnd(start, mutableSetOf(), false, mutableListOf()).size
     }

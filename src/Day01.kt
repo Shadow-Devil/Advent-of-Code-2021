@@ -1,3 +1,5 @@
+import utils.*
+
 @Suppress("unused")
 
 object Day01{
