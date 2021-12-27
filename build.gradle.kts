@@ -18,7 +18,7 @@ tasks {
         gradleVersion = "7.3"
     }
 }
-//
-//dependencies {
-//    implementation("org.assertj:assertj-core:3.21.0")
-//}
+
+dependencies {
+    implementation("io.arrow-kt:arrow-core:1.0.1")
+}

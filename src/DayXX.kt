@@ -5,23 +5,23 @@ object DayXX{
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val testInput = readInputToInt("DayXX_test")
+        val testInput = readInputToText("DayXX_test")
         test(1, testInput, -1)
         //test(2, testInput, -1)
 
 
-        val input = readInputToInt("DayXX")
+        val input = readInputToText("DayXX")
         println("Part 1: ${part1(input)}")
         println("Part 2: ${part2(input)}")
         //test(1, input, -1)
         //test(2, input, -1)
     }
 
-    private fun part1(input: List<Int>): Int {
+    private fun part1(input: String): Int {
         TODO("not implemented")
     }
 
-    private fun part2(input: List<Int>): Int {
+    private fun part2(input: String): Int {
         TODO("not implemented")
     }
 
